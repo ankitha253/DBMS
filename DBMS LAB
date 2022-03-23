@@ -1,0 +1,741 @@
+ create table stu
+ (
+ sid integer,
+ sname varchar2(30),
+ age integer,
+ unique(name,age),
+ primary key(sid)
+ );
+ue(name,age),
+   *
+R at line 6:
+00904: "NAME": invalid identifier
+
+
+ ed
+e file afiedt.buf
+
+ create table stu
+ (
+ sid integer,
+ sname varchar2(30),
+ age integer,
+ unique(sname,age),
+ primary key(sid)
+ )
+ create table stu
+ (
+ sid integer,
+ sname varchar2(30),
+ age integer,
+ unique(sname,age),
+ primary key(sid)
+ );
+te table stu
+         *
+R at line 1:
+00955: name is already used by an existing object
+
+
+ create table stud
+ (
+ sid integer,
+ sname varchar2(30),
+ login varchar2(30),
+ age integer,
+ unique(sname,age),
+ primary key(sid)
+ );
+
+e created.
+
+ create table enrolled
+ (
+ stuidd integer,
+ cid varchar2(20),
+ grade char(1),
+ primary key(stuidd,cid),
+ foreign key(stuidd) references stud(sid)
+ );
+
+e created.
+
+ desc enrolled
+e                                      Null?    Type
+-------------------------------------- -------- ----------------------------
+IDD                                    NOT NULL NUMBER(38)
+                                       NOT NULL VARCHAR2(20)
+DE                                              CHAR(1)
+
+ desc stud
+e                                      Null?    Type
+-------------------------------------- -------- ----------------------------
+                                       NOT NULL NUMBER(38)
+ME                                              VARCHAR2(30)
+IN                                              VARCHAR2(30)
+                                                NUMBER(38)
+
+ insert into stud values(501,'ravi','ravi@cs',18);
+
+w created.
+
+ insert into stud values(502,'ravi','ravi@cs',20);
+
+w created.
+
+ insert into stud values(502,'ravi','ravi@cs',20);
+rt into stud values(502,'ravi','ravi@cs',20)
+
+R at line 1:
+00001: unique constraint (CSE20597.SYS_C005878) violated
+
+
+ insert into stud values(501,'ravi','ravi@cs',20);
+rt into stud values(501,'ravi','ravi@cs',20)
+
+R at line 1:
+00001: unique constraint (CSE20597.SYS_C005878) violated
+
+
+ insert into stud values(502,'suma','suma@cs',20);
+rt into stud values(502,'suma','suma@cs',20)
+
+R at line 1:
+00001: unique constraint (CSE20597.SYS_C005878) violated
+
+
+ select * from stud;
+
+   SID SNAME                          LOGIN
+------ ------------------------------ ------------------------------
+   AGE
+------
+   501 ravi                           ravi@cs
+    18
+
+   502 ravi                           ravi@cs
+    20
+
+
+ 
+e file afiedt.buf
+
+ select * from stud
+ 
+ insert into enrolled values(501,'20cs5t10','b');
+
+w created.
+
+ insert into enrolled values(501,'20cs5t11','a');
+
+w created.
+
+ insert into enrolled values(502,'20cs5t10','c');
+
+w created.
+
+ ed
+e file afiedt.buf
+
+ insert into enrolled values(503,'20cs5t10','c')
+ /
+rt into enrolled values(503,'20cs5t10','c')
+
+R at line 1:
+02291: integrity constraint (CSE20597.SYS_C005947) violated - parent key
+found
+
+
+ desc enrolled
+e                                      Null?    Type
+-------------------------------------- -------- ----------------------------
+IDD                                    NOT NULL NUMBER(38)
+                                       NOT NULL VARCHAR2(20)
+DE                                              CHAR(1)
+
+ select * from enrolled;
+
+STUIDD CID                  G
+------ -------------------- -
+   501 20cs5t10             b
+   501 20cs5t11             a
+   502 20cs5t10             c
+
+ delete from stud where sid=502;
+te from stud where sid=502
+
+R at line 1:
+02292: integrity constraint (CSE20597.SYS_C005947) violated - child record
+d
+
+
+ delete from enrolled where sid=502;
+te from enrolled where sid=502
+                       *
+R at line 1:
+00904: "SID": invalid identifier
+
+
+ ed
+e file afiedt.buf
+
+ delete from enrolled where stuidd=502
+ /
+
+w deleted.
+
+ delete from stud where sid=502;
+
+w deleted.
+
+ select * from std;
+ct * from std
+          *
+R at line 1:
+00942: table or view does not exist
+
+
+ ed
+e file afiedt.buf
+
+ select * from stud;
+ /
+ct * from stud;
+              *
+R at line 1:
+00911: invalid character
+
+
+ select * from stud;
+
+   SID SNAME                          LOGIN
+------ ------------------------------ ------------------------------
+   AGE
+------
+   501 ravi                           ravi@cs
+    18
+
+
+ create table employeee
+ (
+ eid integer,
+ ename varchar2(20);
+e varchar2(20)
+             *
+R at line 4:
+00907: missing right parenthesis
+
+
+ ed
+e file afiedt.buf
+
+ create table employeee
+ (
+ eid integer,
+ ename varchar2(20)
+ create table employeee
+ (
+ eid integer,
+ ename varchar2(20),
+ address varchar2(20),
+ phn integer,
+ unique(eid,ename),
+ primary key(phn)
+ );
+
+e created.
+
+ create table department
+ (
+ did integer,
+ dname varchar2(20),
+ budget integer,
+ unique(did)
+ );
+
+e created.
+
+ create table worksin
+ (
+ eid integer,
+ did integer,
+ since date,
+ foreign key(eid) references employeee(eid),
+ foreign key(did) references department(did));
+ign key(eid) references employeee(eid),
+                                  *
+R at line 6:
+02270: no matching unique or primary key for this column-list
+
+
+ ed
+e file afiedt.buf
+
+ create table worksin
+ (
+ eid integer,
+ did integer,
+ since date,
+ foreign key(eid) references employeee(eid),
+ foreign key(did) references department(did))
+ /
+ign key(eid) references employeee(eid),
+                                  *
+R at line 6:
+02270: no matching unique or primary key for this column-list
+
+
+ ed
+e file afiedt.buf
+
+ create table worksin
+ (
+ eid integer,
+ did integer,
+ since date,
+ primary key(eid,did),
+ foreign key(eid) references employeee(eid),
+ foreign key(did) references department(did))
+ /
+ign key(eid) references employeee(eid),
+                                  *
+R at line 7:
+02270: no matching unique or primary key for this column-list
+
+
+ desc employeee
+e                                      Null?    Type
+-------------------------------------- -------- ----------------------------
+                                                NUMBER(38)
+ME                                              VARCHAR2(20)
+RESS                                            VARCHAR2(20)
+                                       NOT NULL NUMBER(38)
+
+ alter table employeee
+ add primary key(eid);
+primary key(eid)
+*
+R at line 2:
+02260: table can have only one primary key
+
+
+ drop table employeee;
+
+e dropped.
+
+ create table employee
+ (
+  eid integer,
+  ename varchar2(20),
+  address varchar2(20),
+  phn integer,
+  primary key(eid)
+ );
+
+e created.
+
+  create table worksin
+  (
+  eid integer,
+  did integer,
+  since date,
+  primary key(eid,did),
+  foreign key(eid) references employeee(eid),
+  foreign key(did) references department(did));
+eign key(eid) references employeee(eid),
+                         *
+R at line 7:
+00942: table or view does not exist
+
+
+ ed
+e file afiedt.buf
+
+  create table worksin
+  (
+  eid integer,
+  did integer,
+  since date,
+  primary key(eid,did),
+  foreign key(eid) references employee(eid),
+  foreign key(did) references department(did))
+ /
+
+e created.
+
+ insert into employee values(235,'ravi','vip road',null);
+
+w created.
+
+ insert into employee values(843,'suma','mangamoor road',null);
+
+w created.
+
+ insert into employee values(561,'teju','kurnool road',54321);
+
+w created.
+
+ insert into employee values(423,'charpitha','court office road',65432);
+
+w created.
+
+ select eid,ename from employee where phno=null;
+ct eid,ename from employee where phno=null
+                                 *
+R at line 1:
+00904: "PHNO": invalid identifier
+
+
+ select eid,ename from employee where phn=null;
+
+ows selected
+
+ select eid,ename from employee where phn isnull;
+ct eid,ename from employee where phn isnull
+                                     *
+R at line 1:
+00920: invalid relational operator
+
+
+ select eid,ename from employee where phn is null;
+
+   EID ENAME
+------ --------------------
+   235 ravi
+   843 suma
+
+ select eid,ename from employee where phn is not null;
+
+   EID ENAME
+------ --------------------
+   561 teju
+   423 charpitha
+
+ select * from employee;
+
+   EID ENAME                ADDRESS                     PHN
+------ -------------------- -------------------- ----------
+   235 ravi                 vip road
+   843 suma                 mangamoor road
+   561 teju                 kurnool road              54321
+   423 charpitha            court office road         65432
+
+ select concat('aditya','engineering') from dual;
+
+AT('ADITYA','
+-------------
+yaengineering
+
+ select 'aditya' || 'engineering' from dual;
+
+TYA'||'ENGINE
+-------------
+yaengineering
+
+ select lpad('aditya',15,'*') as lpad from dual;
+
+
+-----------
+*****aditya
+
+ select rpad('sweety',20,'*') as rpad from dual;
+
+
+----------------
+ty**************
+
+ select ltrim('123123123123sweety123','123')from dual;
+
+M('12
+-----
+ty123
+
+ select upper('aditya')from dual;
+
+R(
+--
+YA
+
+ select lower('ADITYA')from dual;
+
+R(
+--
+ya
+
+ select substr('abcdefg',-3,2)from dual;
+
+
+
+
+
+ select instr('abab','b')from dual;
+
+R('ABAB','B')
+-------------
+            2
+
+ select instr('abab','b',3)from dual;
+
+R('ABAB','B',3)
+---------------
+              4
+
+ select ASCII('A')from dual;
+
+I('A')
+------
+    65
+
+ select chr(97)from dual;
+
+
+
+
+
+ select reverse('aditya')from dual;
+
+RS
+--
+da
+
+ select replace('jack and joe','j','b')from dual;
+
+ACE('JAC
+--------
+ and boe
+
+ select initcap(name)from student;
+ct initcap(name)from student
+                     *
+R at line 1:
+00942: table or view does not exist
+
+
+  select initcap(name)from stud;
+ect initcap(name)from stud
+            *
+R at line 1:
+00904: "NAME": invalid identifier
+
+
+ ed
+e file afiedt.buf
+
+  select initcap(sname)from stud
+ /
+
+CAP(SNAME)
+--------------------------
+
+
+ select reverse(sname)from dual;
+ct reverse(sname)from dual
+           *
+R at line 1:
+00904: "SNAME": invalid identifier
+
+
+ select reverse(sname)from stud;
+
+RSE(SNAME)
+--------------------------
+
+
+ commit;
+
+it complete.
+
+ select abs(19) from dual;
+
+BS(19)
+------
+    19
+
+ select abs(-19)from dual;
+
+S(-19)
+------
+    19
+
+ select sign(19)from dual;
+
+GN(19)
+------
+     1
+
+ ed
+e file afiedt.buf
+
+ select sign(-19)from dual
+ /
+
+N(-19)
+------
+    -1
+
+ select power(3,2)from dual;
+
+R(3,2)
+------
+     9
+
+ select sqrt(9)from dual;
+
+QRT(9)
+------
+     3
+
+ select ceil(2.2)from dual;
+
+L(2.2)
+------
+     3
+
+ ed
+e file afiedt.buf
+
+ select ceil(-2.2)from dual
+ /
+
+(-2.2)
+------
+    -2
+
+ select floor(2.2)from dual;
+
+R(2.2)
+------
+     2
+
+ ed
+e file afiedt.buf
+
+ select floor(-2.2)from dual
+ 
+ ed
+e file afiedt.buf
+
+ select floor(-2.2)from dual
+ /
+
+R(-2.2)
+-------
+     -3
+
+ select mod(150,7)from dual;
+
+150,7)
+------
+     3
+
+ select round(66.666,2)from dual;
+
+D(66.666,2)
+-----------
+      66.67
+
+ select trunc(66.666,2)from dual;
+
+C(66.666,2)
+-----------
+      66.66
+
+ commit;
+
+it complete.
+
+ select sysdate from dual;
+
+ATE
+-----
+AR-22
+
+ ed
+e file afiedt.buf
+
+ select sysdate+1 from dual
+ /
+
+ATE+1
+-----
+AR-22
+
+ ed
+e file afiedt.buf
+
+ select sysdate-1 from dual
+ /
+
+ATE-1
+-----
+AR-22
+
+ select extract(year from sysdate)from dual;
+
+ACT(YEARFROMSYSDATE)
+--------------------
+                2022
+
+ ed
+e file afiedt.buf
+
+ select extract(day from sysdate)from dual
+ /
+
+ACT(DAYFROMSYSDATE)
+-------------------
+                 23
+
+ select to_char(sysdate,'YYY/mm/dd')from dual;
+
+HAR(S
+-----
+03/23
+
+ ed
+e file afiedt.buf
+
+ select to_char(sysdate,'HH:MM:SS')from dual
+ /
+
+HAR(
+----
+3:19
+
+ select add_months(sysdate,2)from dual;
+
+MONTH
+-----
+AY-22
+
+ ED
+e file afiedt.buf
+
+ select next_day(sysdate,'thursday')from dual
+ /
+
+_DAY(
+-----
+AR-22
+
+ ed
+e file afiedt.buf
+
+ select next_day('10-dec-2019','tuesday')from dual
+ /
+
+_DAY(
+-----
+EC-19
+
+ select last_day(sysdate)from dual;
+
+_DAY(
+-----
+AR-22
+
+ select months_between(to_date('09-dec-2020','dd-mm-yyyy'),to_date('09-dec-2019','dd-mm-yyyy'))f
+dual;
+
+HS_BETWEEN(TO_DATE('09-DEC-2020','DD-MM-YYYY'),TO_DATE('09-DEC-2019','DD-MM-
+----------------------------------------------------------------------------
